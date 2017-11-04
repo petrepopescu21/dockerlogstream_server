@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+        <style>
+            p {
+                font-family: "Consolas";
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Petre's custom logstream</h1>
+        <div id="output">
+
+        </div>
+        <script>
+          var socket = io.connect('http://localhost:3000');
+          socket.on('news', function (data) {
+            var string = data.replace(/\s/g,'\u00a0')
+            var node = document.createElement("p");
+            var textnode = document.createTextNode(string);
+            node.appendChild(textnode);
+            document.getElementById("output").appendChild(node);  
+          });
+        </script>
+    </body>
+</html>
